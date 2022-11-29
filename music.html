@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>followCrom - Audio Player for DJ Mixes</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/music.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+    <link rel="shortcut icon" href="images/favicon_dom.ico" />
+
+    <script type="text/javascript" language="JavaScript" src="js/analytics.js"></script>
+</head>
+
+<body class="main">
+
+    <div class="banner">
+
+        <h1>followCrom</h1>
+
+    </div>
+
+    <div class="content">
+        <div class="toptext">
+            With a bit of JavaScript, it's possible to make a great-looking audio player that updates track names,
+            accompanying images and track progress. However, these players generally rely on multiple audio files to
+            load new track data. I wanted an audio player made specifically for DJ mixes, which loads only one long, and
+            largely opaque audio file.
+
+            <br>
+
+            So I custom built a web audio player designed specifically for DJ mixes. A single audio file can be skipped
+            around as normal, but the tracklisting syncs to the mix timings, rather than audio file data. As the mix
+            plays the listener knows at a glance exactly which song the DJ is spinning! Give it a try:
+
+        </div>
+
+        <div class="content_box">
+            <h1>DJ Mix: Turn On, Tune In, Drop Out (1:14:56)</h1>
+
+            <div class="music-container" id="music-container">
+                <div class="music-info">
+                    <h4 id="title"></h4>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress" id="progress"></div>
+                        <div class="currTime" id="currTime"></div>
+
+                    </div>
+                </div>
+
+                <audio id="audio" preload="true">
+                    <!-- your audio files here -->
+                    Your browser does not support the audio tag.
+                </audio>
+
+
+
+
+                <div class="img-container">
+                    <img src="images/covers/fc_totido.png" alt="DJ mix art work" id="cover" />
+                </div>
+                <div class="navigation">
+                    <button id="prev" class="action-btn">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button id="play" class="action-btn action-btn-big">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="next" class="action-btn">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="timings" style="display: none">
+                0 | Copycat - Funkbox Party
+                194 | Nas ft. Ludacris - Virgo (Qdup's Re-Rub)
+                274 | The Dixie Cups - Iko Iko (Qdup's Edit)
+                309 | Rita Marley - One Draw (Father Funk Mix)
+                483 | J-Sound - I Scream Sound
+                605 | The Niceguys - Stand Up
+                740 | Kool & The Gang - Let's Go Dancin' (Shaka Loves You Booty)
+                897 | Slynk - Boomin’ (DCDJ Calypso Mix)
+                1043 | Pete Rock & C.L Smooth - T.R.O.Y (Father Funk Booty)
+                1264 | Featurecast - My Thing
+                1386 | Steppenwolf - Magic Carpet Ride (Shaka Loves You Booty)
+                1572 | Father Funk - Jungle Strut
+                1663 | James Brown - Payback (B-Side Booty)
+                1756 | The Niceguys - Yonder
+                1916 | DJ Marky & XRS - The Way (Featurecast Mix)
+                2078 | Public Enemy - Harder Than You Think (Featurecast Booty)
+                2267 | C2C - Happy (J-Sound Remix)
+                2474 | Joss Stone - Put Your Hands On Me (Beat Fatigue Mix)
+                2759 | The Great Flood Catastrophe - Fallen Love (Kill Paris Mix)
+                2925 | Shaka Loves You - Flip The Funk
+                3079 | Father Funk - Don't Stop
+                3129 | Nirvana - Smells Like Teen Spirit (Phibes Booty)
+                3309 | B-Side & Detta - Rock 'Em Right
+                3402 | The Commmitments - Mustang Sally (Bezwun Booty)
+                3598 | The Niceguys - Funky Bird
+                3780 | Bobby C Sound TV - Papa Grande
+                3890 | Rockwell - I Need U (Featurecast & WBBL Mix)
+                4115 | Father Funk - Party Rocker
+                4222 | Chris Malinchak - So Good To Me (Chamber Mix)
+            </div>
+
+            <div class="tracklist">
+                Playing at:
+                <div onclick="updateTrack(this)" data-name="Funkybox Party" data-time="0">
+                    0:00:00 <b>Copycat</b> - Funkbox Party</div>
+
+                <div onclick="updateTrack(this)" data-name="Virgo (Qdup's Virgogo Re-Rub)" data-time="194">0:03:14
+                    <b>Nas ft.
+                        Dougie Fresh & Ludacris</b> - Virgo (Qdup's Virgogo Re-Rub)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="Iko Iko (Qdup's Future Go-Go Edit)" data-time="274">0:04:34
+                    <b>The Dixie
+                        Cups</b> - Iko Iko (Qdup's Future Go-Go Edit)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="One Draw (Father Funk Mix)" data-time="309">0:05:09
+                    <b>Rita Marley</b>
+                    - One Draw (Father Funk Mix)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="I
+                Scream Sound" data-time="483">0:08:03 <b>J-Sound</b> - I
+                    Scream Sound</div>
+
+                <div onclick="updateTrack(this)" data-name="Stand Up" data-time="605">0:10:05 <b>The
+                        Niceguys</b> - Stand Up</div>
+
+                <div onclick="updateTrack(this)" data-name="Let's Go Dancin' (Shaka Loves You Booty)" data-time="740">
+                    0:12:20 <b>Kool & The
+                        Gang</b> - Let's Go Dancin' (Shaka Loves You Booty)</div>
+
+                <div onclick="updateTrack(this)" data-name="Boomin’ (DCDJ Calypso Mix)" data-time="897">0:14:57
+                    <b>Slynk</b> -
+                    Boomin’ (DCDJ Calypso Mix)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="T.R.O.Y (Father Funk Booty)" data-time="1043">0:17:23
+                    <b>Pete
+                        Rock & C.L
+                        Smooth</b> - T.R.O.Y (Father Funk Booty)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="My Thing" data-time="1264">0:21.04 <b>Featurecast</b>
+                    - My Thing</div>
+
+                <div onclick="updateTrack(this)" data-name="Magic Carpet Ride (Shaka Loves You Booty)" data-time="1386">
+                    0:23:06
+                    <b>Steppenwolf</b> - Magic Carpet Ride (Shaka Loves You Booty)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="Jungle Strut" data-time="1572">0:26:12 <b>Father Funk</b>
+                    - Jungle Strut</div>
+
+                <div onclick="updateTrack(this)" data-name="Payback (B-Side Booty)" data-time="1663">0:27:43 <b>James
+                        Brown</b>
+                    - Payback (B-Side Booty)</div>
+
+                <div onclick="updateTrack(this)" data-name="Yonder" data-time="1756">0:29:16 <b>The
+                        Niceguys</b> - Yonder</div>
+
+                <div onclick="updateTrack(this)" data-name="The Way (Featurecast Mix)" data-time="1916">0:31:56 <b>DJ
+                        Marky
+                        &
+                        XRS</b> - The Way (Featurecast Mix)</div>
+
+                <div onclick="updateTrack(this)" data-name="Harder Than You Think (Featurecast Booty)" data-time="2078">
+                    0:34:38 <b>Public
+                        Enemy</b> - Harder Than You Think (Featurecast Booty)</div>
+
+                <div onclick="updateTrack(this)" data-name="Happy" data-time="2267">0:37:47 <b>C2C</b> - Happy
+                    (J-Sound Remix)</div>
+
+                <div onclick="updateTrack(this)" data-name="Put Your Hands On Me" data-time="2474">0:41:14 <b>Joss
+                        Stone</b> -
+                    Put Your Hands On Me (Beat Fatigue Mix)</div>
+
+                <div onclick="updateTrack(this)" data-name="Fallen Love" data-time="2759">0:45:59 <b>The Great Flood
+                        Catastrophe</b> - Fallen Love (Kill Paris Mix)</div>
+
+                <div onclick="updateTrack(this)" data-name="Flip The Funk" data-time="2925">0:48:45 <b>Shaka Loves
+                        You</b> - Flip The Funk</div>
+
+                <div onclick="updateTrack(this)" data-name="Don't Stop<" data-time="3079">0:51:19 <b>Father Funk</b>
+                    - Don't Stop</div>
+
+                <div onclick="updateTrack(this)" data-name="Smells Like Teen Spirit" data-time="3129">0:52:09
+                    <b>Nirvana</b> -
+                    Smells Like Teen Spirit (Phibes Booty)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="Rock 'Em Right" data-time="3309">0:55:09 <b>B-Side &
+                        Detta</b> - Rock 'Em Right</div>
+
+                <div onclick="updateTrack(this)" data-name="Mustang Sally (Bezwun Booty)" data-time="3402">0:56:42
+                    <b>The
+                        Commmitments</b> - Mustang Sally (Bezwun Booty)
+                </div>
+
+                <div onclick="updateTrack(this)" data-name="Funky Bird" data-time="3598">0:59:58 <b>The Niceguys</b>
+                    - Funky Bird</div>
+
+                <div onclick="updateTrack(this)" data-name="Papa Grande" data-time="3780">1:03:00 <b>Bobby C Sound
+                        TV</b> - Papa Grande</div>
+
+                <div onclick="updateTrack(this)" data-name="I
+                Need U (Featurecast & WBBL Mix)" data-time="3890">1:04:50 <b>Rockwell</b> - I
+                    Need U (Featurecast & WBBL Mix)</div>
+
+                <div onclick="updateTrack(this)" data-name="Party Rocker" data-time="4115">1:08:35 <b>Father Funk</b>
+                    - Party Rocker</div>
+
+                <div onclick="updateTrack(this)" data-name="So Good To Me (Chamber Mix)" data-time="4222">1:10:22
+                    <b>Chris
+                        Malinchak</b> - So Good To Me (Chamber Mix)
+                </div>
+
+
+
+            </div>
+
+
+
+            <script src="js/music_player.js"></script>
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+
+    </div>
+</body>
+
+</html>
